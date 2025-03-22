@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETILO</title>
+    <link rel="icon"  href="images/Preview.png">
+    <link rel="stylesheet" href="Homepage.css">
+    <style>
+            .footer {
+            background-color: #5D4037;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .footer-section {
+            max-width: 300px;
+        }
+        .footer-section h2 {
+            border-bottom: 2px solid white;
+            padding-bottom: 10px;
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-section ul li {
+            margin: 5px 0;
+        }
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .footer-section input {
+            padding: 8px;
+            width: 80%;
+            margin-top: 10px;
+        }
+        .footer-section button {
+            background-color: white;
+            color: #5D4037;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/Preview.png" alt="Profile Image" class="circle-image">
+            <span>PETILO</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="LostPetList.html">Lost Pet List</a></li>
+            <li><a href="FoundPetList.html">Found Pet List</a></li>
+            <li><a href="ReportPage.html" class="active" onclick="LostFound.html">Report Pet</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container">
+        <div class="text-section">
+            <h1><span>Pet Finder</span> helps you find <br> your missing pet quickly</h1>
+            <p>You need to act quickly to find your missing pet. Report your lost dog, cat, rabbit, and other pets today.</p>
+            <a href="ReportPage.html" class="btn">Get Started Now</a>
+        </div>
+        <div class="image-container">
+            <img src="images/Frontpageimage.svg" alt="Pet Finder Illustration">
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2>Reunite With Your Pet Quickly!<br> 
+            <span class="highlight">Learn <span class="blue-text">How It Works</span></span>
+        </h2>
+        <div class="steps-container">
+            <div class="step">
+                <img src="images/ReportAPet.svg" alt="Report a Pet">
+                <h3 class="report">REPORT A PET</h3>
+                <p>Tell us about your lost/found pet by posting a shout-out on our website. Get help from your community instantly.</p>
+            </div>
+            <div class="step">
+                <img src="images/Promote.svg" alt="Promote">
+                <h3 class="promote">PROMOTE</h3>
+                <p>Use our promotion feature to alert pet lovers in your area via social media and online networks.</p>
+            </div>
+            <div class="step">
+                <img src="images/Reunited.svg" alt="Reunited">
+                <h3 class="reunited">REUNITED</h3>
+                <p>With our help, you'll have a better chance of reuniting with your lost pet. Let's bring them home!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-section about">
+            <h2>PETILO</h2>
+            <p>Petilo is actively helping to search for your lost pets in your local area.</p>
+        </div>
+        <div class="footer-section links">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Join our network</a></li>
+                <li><a href="#">Privacy policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h2>Get In Touch</h2>
+            <p>📧 info@pawmaw.com</p>
+            <p>📧 sales@pawmaw.com</p>
+        </div>
+        <div class="footer-section newsletter">
+            <h2>Sign Up For Newsletter</h2>
+            <input type="email" placeholder="Enter Email">
+            <button>Submit</button>
+        </div>
+    </footer>
+
+</body>
+</html>

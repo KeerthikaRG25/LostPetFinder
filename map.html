@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Pet Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f0e3;
+            color: #5c3d2e;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1000px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 50%;
+            padding: 20px;
+        }
+
+        .form-container {
+            text-align: left;
+        }
+
+        .toggle-buttons button {
+            background: #8b5a2b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .toggle-buttons .active {
+            background: #5c3d2e;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input, textarea {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terms a {
+            color: #8b5a2b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        button[type="submit"] {
+            background: #8b5a2b;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .image-container {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        #map {
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+            border: 3px solid #5c3d2e;
+            border-radius: 10px;
+        }
+    </style>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY6obtVMPwxcqUyq7uGiQdxpBA6GflHys&callback=initMap" defer></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h2>It's super simple and takes only minutes. Just add your pet's info, picture, and contact information.</h2>
+            <div class="form-container">
+                <div class="toggle-buttons">
+                    <button id="lostPetBtn" class="active" onclick="setLostPet()">Lost Pet</button>
+                    <button id="foundPetBtn" onclick="setFoundPet()">Found Pet</button>
+                </div>
+                <form id="petForm">
+                    <label>Pet Name*</label>
+                    <input type="text" id="petName" placeholder="Write Your Pet Name" required>
+                
+                    <label>Email Address*</label>
+                    <input type="email" id="email" placeholder="Enter Email" required>
+                
+                    <label>Contact Number*</label>
+                    <input type="tel" id="contact" placeholder="(91) xxx xxx-xxxx" required>
+                
+                    <label>Password*</label>
+                    <input type="password" id="password" required>
+
+                    <label>Upload Pet Image*</label>
+                    <input type="file" id="petImage" accept="image/*" required>
+
+                    <label>Last Seen Location*</label>
+                    <input type="text" id="address" placeholder="Enter location or click 'My Location'" required>
+                    <input type="hidden" id="latitude">
+                    <input type="hidden" id="longitude">
+                    
+                    <button type="button" onclick="getLocation()">📍 My Location</button>
+                    <div id="map"></div>
+                    <p><a id="osmLink" href="#" target="_blank">View on Google Maps</a></p>
+                    <button type="submit">Report Lost Pet →</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <img src="images/dog.webp" alt="Lost Dog">
+        </div>
+    </div>
+
+    <script>
+        let map, marker;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 12.86402, lng: 80.21560 }, // Default location
+                zoom: 15,
+            });
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            let lat = position.coords.latitude;
+            let lng = position.coords.longitude;
+
+            // Fill form fields
+            document.getElementById("latitude").value = lat;
+            document.getElementById("longitude").value = lng;
+            document.getElementById("address").value = `Lat: ${lat}, Lng: ${lng}`;
+
+            // Show location on Google Maps
+            let userLocation = { lat: lat, lng: lng };
+
+            if (!map) {
+                initMap();
+            }
+
+            map.setCenter(userLocation);
+
+            // Add or move marker
+            if (marker) {
+                marker.setMap(null);
+            }
+
+            marker = new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: "Your Location",
+            });
+
+            document.getElementById("osmLink").href = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        // Image Preview Functionality
+        document.getElementById("petImage").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById("previewImage");
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Ensure the map loads after the page
+        window.onload = function () {
+            initMap();
+        };
+    </script>
+</body>
+</html>

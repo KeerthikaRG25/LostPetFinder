@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found Pets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f3e9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #5c3d2e;
+        }
+  
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: left;
+        }
+        .card img {
+    width: 100%;
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensures the image maintains aspect ratio and fills the area */
+    border-radius: 10px;
+}
+
+        .lost {
+            color: red;
+            font-weight: bold;
+        }
+        .button {
+            display: block;
+            background: #5c3d2e;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination span {
+            padding: 5px 10px;
+            margin: 5px;
+            background: #5c3d2e;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button {
+    background-color: #5c3d2e;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 1250px;
+}
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='location.html';">LOCATION</button>
+
+    <h1>Lost & Found Pets Database</h1>
+  
+    
+   
+    <div class="container">
+        <div class="card">
+            <img src="images/PET1.png" alt="Lost Cat" height="2">
+            <h2>Mau</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 20 days ago, Updated 7 days ago</p>
+            <p>Dighi, Pune 15, Maharashtra, India</p>
+            <a href="pet1.html" class="button">View Details</a>
+        </div>
+        <div class="card">
+            <img src="images/PET2.png" alt="Lost Parrot">
+            <h2>Ellie</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 58 days ago, Updated 12 days ago</p>
+            <p>Police Line Area, Hisar, Haryana, India</p>
+            <a href="pet2.html" class="button">View Details</a>
+        </div>
+        <div class="card">
+            <img src="images/PET3.png" alt="Lost Cat">
+            <h2>Mau</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 10 days ago, Updated 6 days ago</p>
+            <p>Salam Kalam, Maharashtra, India</p>
+            <a href="#" class="button">View Details</a>
+        </div>
+        <div class="card">
+            <img src="images/PET4.png" alt="Lost Parrot">
+            <h2>Akalya</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 8 days ago, Updated 2 days ago</p>
+            <p>Karaikudi, TamilNadu, India</p>
+            <a href="#" class="button">View Details</a>
+        </div>
+         <div class="card">
+            <img src="images/PET5.png" alt="Lost Parrot">
+            <h2>Jinie</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 18 days ago, Updated 7 days ago</p>
+            <p>Police Line Area, Kochi, Kerala, India</p>
+            <a href="#" class="button">View Details</a>
+        </div>
+         <div class="card">
+            <img src="images/PET6.png" alt="Lost Parrot">
+            <h2>Ellie</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 12 days ago, Updated 7 days ago</p>
+            <p>Karur, TamilNadu, India</p>
+            <a href="#" class="button">View Details</a>
+        </div>
+         <div class="card">
+            <img src="images/PET7.png" alt="Lost Parrot">
+            <h2>Jasmine</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 58 days ago, Updated 12 days ago</p>
+            <p>Police Line Area, Kelambakkam, Chennai, India</p>
+            <a href="#" class="button">View Details</a>
+        </div>
+         <div class="card">
+            <img src="images/PET8.jpg" alt="Lost Parrot">
+            <h2>Jemie</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 38 days ago, Updated 26 days ago</p>
+            <p>OMR, Chennai, India</p>
+            <a href="#" class="button">View Details</a>
+        </div>
+         <div class="card">
+            <img src="images/PET9.webp" alt="Lost Parrot">
+            <h2>Ellie</h2>
+            <p class="lost">Lost</p>
+            <p>Lost 58 days ago, Updated 12 days ago</p>
+            <p>Police Line Area, Hisar, Haryana, India</p>
+            <a href="#" class="button">View Details</a>
+        </div>
+    </div>
+    <script>
+        async function fetchPets() {
+            const response = await fetch("http://localhost:5000/ReportPage");
+            const pets = await response.json();
+        
+            const container = document.querySelector(".container");
+            container.innerHTML = "";
+        
+            pets.forEach(pet => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.innerHTML = `
+                    <img src="images/PET1.png" alt="Lost Pet">
+                    <h2>${pet.petName}</h2>
+                    <p class="${pet.type.toLowerCase()}">${pet.type}</p>
+                    <p>Reported on ${new Date(pet.createdAt).toLocaleDateString()}</p>
+                    <p>${pet.searchAddress || "No address provided"}</p>
+                    <a href="#" class="button">View Details</a>
+                `;
+                container.appendChild(card);
+            });
+        }
+        
+        fetchPets();
+        </script>
+        
+    
+</body>
+</html>

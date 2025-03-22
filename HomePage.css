@@ -1,0 +1,199 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #4d3227;
+    padding: 20px 45px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 40px;
+    margin-right: 10px;
+}
+.circle-image {
+    width: 100px;  /* Adjust size as needed */
+    height: px; /* Ensure it's a square */
+    border-radius: 75%;
+ /* Ensures the image fills the circular area */
+    border: 3px solid #4d3227; /* Optional: Add a border */
+}
+
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+    background: #c9a47d;
+    color: #4d3227;
+}
+
+/* Hero Section */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 50px;
+}
+
+.text-section {
+    width: 50%;
+}
+
+.text-section h1 {
+    font-size: 36px;
+    color: #4d3227;
+    font-weight: bold;
+}
+
+.text-section h1 span {
+    color: #8b5e3c;
+}
+
+.text-section p {
+    font-size: 18px;
+    color: #555;
+    margin: 20px 0;
+}
+
+.btn {
+    display: inline-block;
+    background: #8b5e3c;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #6a3f2b;
+}
+
+/* How It Works Section */
+.how-it-works {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.how-it-works h2 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+.blue-text {
+    color: #0099ff;
+}
+
+.steps-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.step {
+    width: 30%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.step img {
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+.step h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Colors for different steps */
+.report {
+    color: #d9534f;
+}
+
+.promote {
+    color: #f0ad4e;
+}
+
+.reunited {
+    color: #5cb85c;
+}
+.image-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .text-section, .image-section {
+        width: 100%;
+    }
+    
+    .steps-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .step {
+        width: 90%;
+        margin: 0 auto;
+    }
+}

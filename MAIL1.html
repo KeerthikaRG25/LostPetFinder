@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Pet Form</title>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY6obtVMPwxcqUyq7uGiQdxpBA6GflHys&libraries=places&callback=initMap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f0e3;
+            color: #5c3d2e;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1000px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container { width: 50%; padding: 20px; }
+        .toggle-buttons button {
+            background: #8b5a2b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .toggle-buttons .active { background: #5c3d2e; }
+        form { display: flex; flex-direction: column; }
+        label { margin: 10px 0 5px; }
+        input, textarea { padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; }
+        button { background: #8b5a2b; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 5px; }
+        .image-container { width: 50%; display: flex; justify-content: center; align-items: center; }
+        .image-container img { max-width: 100%; height: auto; border-radius: 10px; }
+        #map { width: 100%; height: 300px; margin-top: 10px; border: 3px solid #5c3d2e; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h2>It's super simple and takes only minutes. Just add your pet's info, picture, and contact information.</h2>
+            <div class="toggle-buttons">
+                <button id="lostPetBtn" class="active" onclick="togglePetType(event, 'lost')">Lost Pet</button>
+                <button id="foundPetBtn" onclick="togglePetType(event, 'found')">Found Pet</button>
+            </div>
+            <form id="petForm">
+                <label>Pet Name*</label>
+                <input type="text" id="petName" required>
+                <label>Email Address*</label>
+                <input type="email" id="email" required>
+                <label>Contact Number*</label>
+                <input type="tel" id="contact" required>
+                <label>Upload Pet Image*</label>
+                <input type="file" id="petImage" accept="image/*" required>
+                <label>Description*</label>
+                <textarea id="description" required></textarea>
+                <label>Last Seen Location*</label>
+                <input type="text" id="address" required>
+                <button type="button" onclick="getLocation()">📍 My Location</button>
+                <div id="map"></div>
+                <button type="submit">Report  Pet →</button>
+            </form>
+        </div>
+        <div class="image-container">
+            <img src="images/dog.webp" alt="Lost Dog">
+        </div>
+    </div>
+    <script>
+        emailjs.init("cLBnmFEItxPzGI5-g");
+        let map, marker;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), { center: { lat: 12.86402, lng: 80.21560 }, zoom: 15 });
+        }
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+        function showPosition(position) {
+            let lat = position.coords.latitude;
+            let lng = position.coords.longitude;
+            document.getElementById("address").value = `Lat: ${lat}, Lng: ${lng}`;
+            let userLocation = { lat: lat, lng: lng };
+            if (!map) { initMap(); }
+            map.setCenter(userLocation);
+            if (marker) { marker.setMap(null); }
+            marker = new google.maps.Marker({ position: userLocation, map: map, title: "Your Location" });
+        }
+        function showError(error) { alert("Error getting location: " + error.message); }
+        function togglePetType(event, type) {
+            document.getElementById("lostPetBtn").classList.remove("active");
+            document.getElementById("foundPetBtn").classList.remove("active");
+            event.target.classList.add("active");
+        }
+        document.getElementById("petForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = {
+                petName: document.getElementById("petName").value,
+                email: document.getElementById("email").value,
+                contact: document.getElementById("contact").value,
+                description: document.getElementById("description").value,
+                address: document.getElementById("address").value
+            };
+            emailjs.send("service_f0ycs1z", "template_gw4cpnp", formData)
+            .then(function() {
+                alert("Email sent successfully!");
+                setTimeout(() => { window.location.href = "LostPetList.html"; }, 1000);
+            }, function(error) {
+                alert("Failed to send email: " + JSON.stringify(error));
+            });
+        });
+    </script>
+</body>
+</html>
