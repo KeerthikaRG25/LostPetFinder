@@ -9,8 +9,7 @@ Lost Pet Finder is a platform designed to help reunite lost pets with their owne
 - 📢 **Community Alerts**: Notify local pet finders and shelters.
 - 📊 **Dashboard**: Manage lost/found pet listings efficiently.
 
-## 📸 Screenshots
-(Include images or GIFs of your project here)
+
 
 ## 🛠️ Tech Stack
 - **Frontend**: React, HTML, CSS, JavaScript
